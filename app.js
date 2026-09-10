@@ -3,12 +3,12 @@ function calculatePayout(salePrice, commissionPercent, optionalFees) {
   const commission = Math.min(100, Math.max(0, Number(commissionPercent) || 0));
   const fees = Math.max(0, Number(optionalFees) || 0);
   const netSale = Math.max(0, sale - fees);
-  const consignorEarnings = netSale * commission / 100;
-  const storeEarnings = netSale - consignorEarnings;
+  const storeEarnings = netSale * commission / 100;
+  const consignorEarnings = netSale - storeEarnings;
   return {
     storeEarnings: Number(storeEarnings.toFixed(2)),
     consignorEarnings: Number(consignorEarnings.toFixed(2)),
-    effectiveSplit: netSale ? Number((consignorEarnings / netSale * 100).toFixed(1)) : commission
+    effectiveSplit: Number((100 - commission).toFixed(1))
   };
 }
 
